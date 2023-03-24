@@ -119,7 +119,7 @@ const refreshAccessTokenController = async (req, res) => {
    return res.send(error(401,"Refresh Token in cookie is required"));
   }
 
-  const refreshToken = cookies.jwt;
+  const refreshToken = cookies.jwt; 
   
   if(!refreshToken){
     // return res.status(401).send("Refresh Token is Required")
