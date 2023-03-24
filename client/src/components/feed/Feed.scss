@@ -1,0 +1,31 @@
+.feed {
+    margin-top: 10px;
+
+    .container {
+        display: flex;
+        gap: 10px;
+        height: 100vh;
+        padding: 10px;
+    }
+
+    .aside {
+        flex: 1;
+        border: 1px solid gray;
+        border-radius: 4px;
+    }
+    .left-side {
+        flex: 2;
+        overflow-y: scroll;
+    }
+
+    .right-side {
+        flex: 1;
+        border: 1px solid grey;
+        border-radius: 4px;
+
+        .title {
+            text-align: center;
+            padding: 10px;
+        }
+    }
+}
