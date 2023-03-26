@@ -117,8 +117,13 @@ const deleteMyProfileController = async (req, res) => {
   }
 };
 
+const getMyInfoController = async (req, res) => {
+
+}
+
 module.exports = {
   followOrUnfollowController,
   getAllPostsController,
   deleteMyProfileController,
+  getMyInfoController
 };
