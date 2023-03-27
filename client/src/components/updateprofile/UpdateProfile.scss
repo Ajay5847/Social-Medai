@@ -7,21 +7,34 @@
         gap: 20px;
 
         .left-part {
-            display: flex;
-            padding: 20px;
-            justify-content: center;
             flex: 1;
+            text-align: center;
 
-            .userImg {
+            .input-user-img {
+                display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .labelImg {
                 width: 100px;
                 height: 100px;
-    
+                border-radius: 50%;
+                border: 2px dashed black;
+                cursor: pointer;
+
                 img {
                     width: 100%;
                     height: 100%;
+                    border-radius: 50%;
+                    object-fit: cover;
                 }
             }
+
+            .inputImg {
+                display: none;
+            }
         }
+    }
 
         .right-part {
             flex: 2;

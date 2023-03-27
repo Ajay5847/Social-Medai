@@ -1,0 +1,40 @@
+.Login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: aqua;
+}
+.Login .login-box {
+  border: 1px solid black;
+  padding: 40px;
+  min-width: 400px;
+  border-radius: 8px;
+  background-color: white;
+}
+.Login .login-box label, .Login .login-box input {
+  display: block;
+  width: 100%;
+  margin-block: 8px;
+}
+.Login .login-box label {
+  font-weight: bold;
+}
+.Login .login-box input {
+  padding: 8px 16px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.Login .login-box .submit {
+  background-color: #29b4ff;
+  color: white;
+  border: none;
+  margin-top: 16px;
+  font-weight: bold;
+}
+.Login .login-box .submit:hover {
+  background-color: #249dde;
+}
+.Login .login-box .subheading {
+  text-align: center;
+}/*# sourceMappingURL=Login.css.map */

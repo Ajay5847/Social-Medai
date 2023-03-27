@@ -1,6 +1,7 @@
 const Post = require("../Models/Post");
 const User = require("../Models/User");
 const { error, success } = require("../utils/responseWrapper");
+const cloudinary = require("cloudinary").v2;
 
 const followOrUnfollowController = async (req, res) => {
   try {
@@ -72,7 +73,7 @@ const deleteMyProfileController = async (req, res) => {
     // res.send(success(200, "Success"))
     const curUser = await User.findById(curUserId);
 
-    if(!curUser){
+    if (!curUser) {
       return res.send(error(404, "User not found"));
     }
     //delete all my posts
@@ -118,12 +119,49 @@ const deleteMyProfileController = async (req, res) => {
 };
 
 const getMyInfoController = async (req, res) => {
+  try {
+    const user = await User.findById(req._id);
+    console.log(user);
+    return res.send(success(200, { user }));
+  } catch (e) {
+    return res.send(error(500, e.message));
+  }
+};
 
-}
+const updateUserProfileController = async (req, res) => {
+  try {
+    const { name, bio, userImg } = req.body;
+
+    const user = await User.findById(req._id);
+    if (name) {
+      user.name = name;
+    }
+
+    if (bio) {
+      user.bio = bio;
+    }
+
+    if (userImg) {
+      const cloudImg = await cloudinary.uploader.upload(userImg, {
+        folder: "profileImg",
+      });
+
+      user.avatar = {
+        url: cloudImg.secure_url,
+        publicId: cloudImg.public_id,
+      };
+    }
+    await user.save();
+    return res.send(success(200, { user }));
+  } catch (e) {
+    return res.send(error(500, e.message));
+  }
+};
 
 module.exports = {
   followOrUnfollowController,
   getAllPostsController,
   deleteMyProfileController,
-  getMyInfoController
+  getMyInfoController,
+  updateUserProfileController,
 };
