@@ -1,38 +1,25 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import Avatar from "../avatar/Avatar";
 import { HiOutlineLogout } from'react-icons/hi'
-import LoadingBar from 'react-top-loading-bar'
 import "./NavBar.scss";
+import {  useSelector } from "react-redux";
+
 
 function NavBar() {
 
+  const myProfile = useSelector(state => state.appConfigReducer.myProfile);
   const navigate = useNavigate();
-  const loadingBar = useRef(null);
-
-  const [loading, setLoading] = useState(false);
-
-  function toggelLoadingBar() {
-    if(loading){
-      setLoading(false);
-      loadingBar.current.complete();
-    }
-    else{
-      setLoading(true);
-      loadingBar.current.continuousStart();
-    }
-  }
 
   return (
     <div className="NavBar">
-      <LoadingBar color='#f11946' ref={loadingBar} />
       <div className="container">
         <h2 className="banner hover-link" onClick={() => navigate('/')}>Social Media</h2>
         <div className="right-side">
-          <div className="profile hover-link" onClick={() => navigate('/profile/ajay')}>
-            <Avatar />
+          <div className="profile hover-link" onClick={() => navigate(`/profile/${myProfile?._id}`)}>
+            <Avatar src={myProfile?.avatar?.url} />
           </div>
-          <div className="logout hover-link"onClick={toggelLoadingBar}>
+          <div className="logout hover-link">
             <HiOutlineLogout />
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import CreatePost from '../CreatePost/CreatePost'
 import Follower from '../followers/Follower'
 import Myself from '../Myself/Myself'
 import Post from '../post/Post'
@@ -12,6 +13,9 @@ function Feed() {
           <Myself />
         </div>
         <div className="left-side">
+          <div className="create-post">
+          <CreatePost />
+          </div>
           <Post />
           <Post />
           <Post />

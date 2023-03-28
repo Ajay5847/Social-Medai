@@ -16,6 +16,10 @@
     .left-side {
         flex: 2;
         overflow-y: scroll;
+
+        .create-post {
+            margin-bottom: 10px;
+        }
     }
 
     .right-side {

@@ -1,0 +1,58 @@
+.CreatePost {
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 20px;
+    gap: 20px;
+
+    .left-part {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: content;
+    }
+
+    .right-part {
+        flex-grow: 1;
+        margin-top: 0;
+
+        input {
+            width: 100%;
+            padding: 8px 16px;
+            border: 1px solid gray;
+            border-radius: 4px;
+        }
+
+        .img-container {
+            margin-top: 20px;
+
+            .post-img {
+                width: 100%;
+                aspect-ratio: 16 / 9;
+                object-fit: cover;
+            }
+        }
+        .labelImg {
+            display: inline-block;
+            background-color: rgb(85, 85, 250);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .inputImg {
+            display: none;
+        }
+
+        .bottom-part {
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}

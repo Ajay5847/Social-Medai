@@ -7,7 +7,7 @@ const postSchema = mongoose.Schema({
     required: true,
   },
   image: {
-    publicId: mongoose.Schema.Types.ObjectId,
+    publicId: String,
     url: String,
   },
   caption: {

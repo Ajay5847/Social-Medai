@@ -29,7 +29,7 @@ axiosClient.interceptors.response.use(async (response) => {
         .create({
             withCredentials: true,
         })
-        .get(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`);
+        .post(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`);
 
     if (response.data.status === "ok") {
         setItem(KEY_ACCESS_TOKEN, response.data.result.accessToken);

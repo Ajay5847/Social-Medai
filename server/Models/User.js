@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
         type: String,
     },
     avatar: {
-        publicId: mongoose.Schema.Types.ObjectId,
+        publicId: String,
         url: String,
     },
     followers: [

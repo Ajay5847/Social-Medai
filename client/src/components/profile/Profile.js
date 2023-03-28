@@ -1,12 +1,21 @@
-import React from "react";
-import { useNavigate } from "react-router";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
 import userImg from "../../assets/user.png";
+import { getUserProfile } from "../../redux/slices/postSlice";
 import Post from "../post/Post";
 import "./Profile.scss";
 
 function Profile() {
 
+  const userProfile = useSelector(state => state.postSliceReducer.userProfile);
   const navigate = useNavigate();
+  const params = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserProfile(params.userId));
+  }, [])
 
   return (
     <div className="Profile">
@@ -20,9 +29,9 @@ function Profile() {
         <div className="right-side">
           <div className="profile-card">
             <div className="avatar">
-              <img src={userImg} alt="" className="user-image" />
+              <img src={userProfile?.avatar?.url} alt="" className="user-image" />
             </div>
-            <h2 className="username">M Ajay Kumar</h2>
+            <h2 className="username">{userProfile?.name}</h2>
             <p className="bio">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quod
               aperiam illum saepe amet facilis corrupti dolor officiis maxime
