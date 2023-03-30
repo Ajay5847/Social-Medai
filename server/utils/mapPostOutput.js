@@ -1,4 +1,4 @@
-const mapPostOutput = async (post, userId) => {
+const mapPostOutput = (post, userId) => {
     return {
         _id: post._id,
         caption: post.caption,
@@ -8,7 +8,7 @@ const mapPostOutput = async (post, userId) => {
             name: post.owner.name,
             avatar: post.owner.avatar,
         },
-        likes: post.likes.length,
+        likesCount: post.likes.length,
         isLiked: post.likes.includes(userId)
     }
 }

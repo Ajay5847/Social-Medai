@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { axiosClient } from '../../utils/axiosClient';
 
 
-export const getMyInfo = createAsyncThunk('user/getMyInfo', async (body, thunkAPI) => {
+export const getMyInfo = createAsyncThunk('user/getMyInfo', async (_, thunkAPI) => {
     try {
         thunkAPI.dispatch(setLoading(true));
         const response = await axiosClient.get('/user/getMyInfo');

@@ -1,5 +1,6 @@
 const Post = require("../Models/Post");
 const User = require("../Models/User");
+const { mapPostOutput } = require("../utils/mapPostOutput");
 const cloudinary = require('cloudinary').v2;
 const { success, error } = require("../utils/responseWrapper");
 
@@ -39,7 +40,7 @@ const likeAndUnlikeController = async (req, res) => {
   try {
     const { postId } = req.body;
     const curUserId = req._id;
-    const post = await Post.findById(postId);
+    const post = await Post.findById(postId).populate('owner');
 
     if (!post) {
       return res.send(error(401, "Post not found"));
@@ -48,13 +49,12 @@ const likeAndUnlikeController = async (req, res) => {
     if (post.likes.includes(curUserId)) {
       const index = post.likes.indexOf(curUserId);
       post.likes.splice(index, 1);
-      await post.save();
-      return res.send(success(200, "Post Unliked"));
     } else {
       post.likes.push(curUserId);
-      await post.save();
-      return res.send(success(200, "Post Liked"));
     }
+
+    await post.save();
+    return res.send(success(200, {post: mapPostOutput(post, req._id)}));
   } catch (e) {
     res.send(error(500, e.message));
   }

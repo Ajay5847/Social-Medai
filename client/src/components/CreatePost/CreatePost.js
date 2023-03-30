@@ -41,7 +41,7 @@ function CreatePost() {
         finally {
             dispatch(setLoading(false));
             setCaption('');
-            setPostImg(null);
+            setPostImg("");
         }
     }
 
