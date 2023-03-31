@@ -8,7 +8,6 @@ const followOrUnfollowController = async (req, res) => {
   try {
     const { userIdToFollow } = req.body;
     const curUserId = req._id;
-
     if (curUserId === userIdToFollow) {
       return res.send(error(404, "One cannot follow themselves"));
     }
@@ -19,24 +18,19 @@ const followOrUnfollowController = async (req, res) => {
     if (!userToFollow) {
       return res.send(error(404, "User to follow not found"));
     }
-
     if (curUser.followings.includes(userIdToFollow)) {
       const followingIndex = await curUser.followings.indexOf(userIdToFollow);
       const followerIndex = await userToFollow.followers.indexOf(curUserId);
       curUser.followings.splice(followingIndex, 1);
       userToFollow.followers.splice(followerIndex, 1);
-
-      await curUser.save();
-      await userToFollow.save();
-
-      return res.send(success(200, "User Unfollowed"));
     } else {
       curUser.followings.push(userIdToFollow);
       userToFollow.followers.push(curUserId);
-      await curUser.save();
-      await userToFollow.save();
-      return res.send(success(200, "User Followed"));
     }
+
+    await curUser.save();
+    await userToFollow.save();
+    return res.send(success(200, {user: userToFollow}));
   } catch (e) {
     return res.send(error(500, e.message));
   }
@@ -45,14 +39,26 @@ const followOrUnfollowController = async (req, res) => {
 const getAllPostsController = async (req, res) => {
   try {
     const curUserId = req._id;
-    const curUser = await User.findById(curUserId);
+    const curUser = await User.findById(curUserId).populate('followings');
 
-    const posts = await Post.find({
+    const fullPosts = await Post.find({
       owner: {
         $in: curUser.followings,
       },
-    });
-    return res.send(success(200, posts));
+    }).populate('owner');
+
+    const posts = fullPosts.map((item) => mapPostOutput(item, req._id)).reverse();
+    console.log(posts);
+
+    const followingIds = curUser.followings.map(item => item._id);
+    followingIds.push(req._id);
+    const Suggestions = await User.find({
+      _id: {
+        $nin: followingIds
+      },
+    })
+
+    return res.send(success(200, {...curUser._doc, Suggestions, posts}));
   } catch (e) {
     res.send(error(500, e.message));
   }

@@ -36,6 +36,8 @@ code {
   border: none;
   padding: 10px 20px;
   border-radius: 10px;
+  background-color: rgb(44, 136, 172);
+  color: wheat;
   cursor: pointer;
 }
 

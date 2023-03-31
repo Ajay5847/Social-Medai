@@ -78,6 +78,7 @@ const logoutController = async (req, res) => {
         httpsOnly: true,
         secure: true
       })
+      return res.send(success(200, 'user logged out'))
     } catch (e) {
       res.send(error(500, e.message));
     }

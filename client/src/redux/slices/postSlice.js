@@ -3,31 +3,21 @@ import { axiosClient } from '../../utils/axiosClient';
 import { setLoading } from './appConfigSlice';
 
 
-export const getUserProfile = createAsyncThunk('user/getUserProfile', async (body, thunkAPI) => {
+export const getUserProfile = createAsyncThunk('user/getUserProfile', async (body) => {
     try {
-        thunkAPI.dispatch(setLoading(true));
         const response = await axiosClient.post('/user/getUserProfile', body);
-        console.log("userProfile", response.result);
         return response.result;
     } catch (e) {
         return Promise.reject(e);
-    }
-    finally{
-        thunkAPI.dispatch(setLoading(false));
     }
 })
 
 export const likeAndUnlike = createAsyncThunk('post/likeAndUnlike', async (body, thunkAPI) => {
     try {
-        thunkAPI.dispatch(setLoading(true));
         const response = await axiosClient.post('/posts/like', body);
-        // console.log("likeAndUnlike", response.result);
         return response.result.post;
     } catch (e) {
         return Promise.reject(e);
-    }
-    finally{
-        thunkAPI.dispatch(setLoading(false));
     }
 })
 
@@ -43,8 +33,8 @@ const postSlice = createSlice({
         })
         .addCase(likeAndUnlike.fulfilled, (state, action) => {
             const post = action.payload;
-            const index = state.userProfile.posts.findIndex(item => item._id === post._id);
-            if(index != -1){
+            const index = state?.userProfile?.posts?.findIndex(item => item._id === post._id);
+            if(index != undefined && index != -1){
                 state.userProfile.posts[index] = post;
             }
         })

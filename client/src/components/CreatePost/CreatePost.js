@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Avatar from "../avatar/Avatar";
 import { BsCardImage } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux' 
-import { setLoading } from "../../redux/slices/appConfigSlice";
 import './CreatePost.scss'
 import { axiosClient } from "../../utils/axiosClient";
 import { getUserProfile } from "../../redux/slices/postSlice";
@@ -27,7 +26,6 @@ function CreatePost() {
 
     async function hanldePostSubmit(e) {
         try {
-            dispatch(setLoading(true));
             const result = await axiosClient.post('/posts/', {
                 caption,
                 postImg
@@ -39,7 +37,6 @@ function CreatePost() {
             return Promise.reject(e);
         }
         finally {
-            dispatch(setLoading(false));
             setCaption('');
             setPostImg("");
         }
@@ -48,7 +45,7 @@ function CreatePost() {
   return (
     <div className="CreatePost">
       <div className="left-part">
-        <Avatar  />
+        <Avatar src={myProfile?.avatar?.url} />
       </div>
       <div className="right-part">
         <input

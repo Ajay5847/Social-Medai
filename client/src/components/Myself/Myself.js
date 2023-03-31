@@ -1,17 +1,19 @@
 import React from 'react'
 import userImg from '../../assets/user.png'
 import './Myself.scss'
+import { useSelector } from 'react-redux';
 
 function Myself() {
+  const myProfile = useSelector((state) => state.appConfigReducer.myProfile);
   return (
     <div className='myself'>
         <div className="container">
             <div className="avatar">
-                <img src={userImg} alt="" />
+                <img src={myProfile?.avatar?.url || userImg} alt="" />
             </div>
-            <h2 className="username">M Ajay Kumar</h2>
-            <p className="info">40 Followers | 38 Followings</p>
-            <p className='bio'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, nesciunt?</p>
+            <h2 className="username">{myProfile?.name}</h2>
+            <p className="info">{myProfile?.followers?.length} Followers | {myProfile?.followings?.length} Followings</p>
+            <p className='bio'>{myProfile?.bio}</p>
         </div>
     </div>
   )

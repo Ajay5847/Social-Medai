@@ -5,20 +5,28 @@ import backgroundImg from "../../assets/background.jpg";
 import { useDispatch } from 'react-redux'
 import "./Post.scss";
 import { likeAndUnlike } from "../../redux/slices/postSlice";
+import { useNavigate } from "react-router";
+import { showToast } from "../../redux/slices/appConfigSlice";
+import { TOAST_SUCCESS } from "../../App";
 
 function Post({post}) {
 
+  const navigate =useNavigate();
   const dispatch = useDispatch();
 
   async function handleLike() {
+    dispatch(showToast({
+      type: TOAST_SUCCESS,
+      message: "Liked or Unliked"
+    }))
     dispatch(likeAndUnlike({
       postId: post._id
-    }))
+    }));
   }
 
   return (
     <div className="post">
-      <div className="heading">
+      <div className="heading" onClick={() => navigate(`/profile/${post.owner._id}`)}>
         <Avatar src={post?.owner?.avatar.url} />
         <h4>{post?.owner?.name}</h4>
       </div>
@@ -27,11 +35,11 @@ function Post({post}) {
       </div>
       <div className="footer">
         <div className="like" onClick={handleLike}>
-          {post.isLiked ? <AiFillHeart style={{color: 'red'}} className="icon"/> : <AiOutlineHeart className="icon" />}
+          {post?.isLiked ? <AiFillHeart style={{color: 'red'}} className="icon"/> : <AiOutlineHeart className="icon" />}
           <h4>{post?.likesCount} Likes</h4>
         </div>
         <p className="caption">{post?.caption}</p>
-        <h6 className="time-ago">4 hours ago</h6>
+        <h6 className="time-ago">{post?.timeAgo}</h6>
       </div>
     </div>
   );
