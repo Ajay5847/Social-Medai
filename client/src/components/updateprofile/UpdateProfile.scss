@@ -1,6 +1,8 @@
+$medium: 800px;
 .update-profile {
     margin: 10px;
-
+    min-width: 500px;
+  
     .container {
         display: flex;
         align-items: center;
@@ -21,7 +23,6 @@
                 border-radius: 50%;
                 border: 2px dashed black;
                 cursor: pointer;
-
                 img {
                     width: 100%;
                     height: 100%;
@@ -39,8 +40,9 @@
         .right-part {
             flex: 2;
             border: 1px solid rgb(201, 194, 194);
-            border-radius: 10px;
+            border-radius: 17px;
             padding: 10px;
+            background-color: white;
 
             label, input {
                 display: block;
@@ -83,6 +85,13 @@
                     color: white;
                 }
             }
+        }
+    }
+
+    @media screen and (max-width: $medium)  {
+        .container {
+            display: flex;
+            flex-direction: column;
         }
     }
 }

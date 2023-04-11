@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Avatar from "../avatar/Avatar";
-import "./Follower.scss";
+import "./Follower.scss";  
 import { useDispatch, useSelector } from "react-redux";
 import { followAndUnFollow } from "../../redux/slices/FeedSlice";
 import { useNavigate } from "react-router";
@@ -19,7 +19,7 @@ function Follower({user}) {
 
   function handleFollowAndUnFollow() {
     dispatch(followAndUnFollow({
-      userIdToFollow: user._id
+      userIdToFollow: user._id 
     }))
   }
 
@@ -29,7 +29,7 @@ function Follower({user}) {
         <Avatar src={user?.avatar?.url} />
         <h4 className="name">{user?.name}</h4>
       </div>
-      <h5 onClick={handleFollowAndUnFollow} className = {isFollowing ? "hover-link follow-link" : "btn-primary"}>{isFollowing ? "UnFollow" : "Follow"}</h5>
+      <h5 onClick={handleFollowAndUnFollow} className = {isFollowing ? "hover-link follow-link unfollow" : "btn-primary tag"}>{isFollowing ? "UnFollow" : "Follow"}</h5>
     </div>
   );
 }

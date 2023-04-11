@@ -1,3 +1,4 @@
+$medium: 800px;
 .Signup {
     height: 100vh;
     display: flex;
@@ -6,7 +7,7 @@
     background-color: aqua;
 
     .signup-box {
-        border: 1px solid black;
+        border: 1px solid rgb(255, 0, 0);
         padding: 40px;
         min-width: 400px;
         border-radius: 8px;
@@ -43,5 +44,18 @@
         .subheading {
             text-align: center;
         }
+    }
+}
+
+@media screen and (max-width: $medium) {
+    .Signup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        // .signup-box {
+        //     width: 100vw;
+        //     height: 100vh;
+        // }
     }
 }

@@ -1,3 +1,4 @@
+$medium: 800px;
 .Login {
     height: 100vh;
     display: flex;
@@ -42,6 +43,19 @@
 
         .subheading {
             text-align: center;
+        }
+    }
+}
+ 
+@media screen and (max-width: $medium) {
+    .Login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .login-box {
+            width: 100vw;
+            height: 100vh;
         }
     }
 }

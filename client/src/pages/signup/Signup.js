@@ -1,15 +1,28 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Signup.scss";
+import { useDispatch } from "react-redux";
+import { axiosClient } from "../../utils/axiosClient";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  function handleSubmit(e){
+  async function handleSubmit(e){
     e.preventDefault();
-
+    try {
+      const result = await axiosClient.post("/auth/signup", {
+          name,
+          email,
+          password,
+      });
+      navigate('/login')
+  } catch (error) {
+      console.log(error);
+  }
   }
 
   return (
@@ -44,7 +57,7 @@ function Signup() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <input type="submit" className="submit" value="Submit" />
+          <input type="submit" onClick={handleSubmit} className="submit" value="Submit" />
         </form>
         <p>
           Already have an account<Link to="/login"> Login</Link>

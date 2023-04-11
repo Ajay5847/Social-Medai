@@ -23,7 +23,7 @@ function NavBar() {
     <div className="NavBar">
       <div className="container">
         <h2 className="banner hover-link" onClick={() => navigate("/")}>
-          Social Media
+          PicBuzz
         </h2>
         <div className="right-side">
           <div

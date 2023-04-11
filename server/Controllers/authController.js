@@ -43,7 +43,7 @@ const loginController = async (req, res) => {
       return res.send(error(400,"Email and Password are Required"));
     }
 
-    const oldUser = await User.findOne({ email });
+    const oldUser = await User.findOne({ email }).select('+password');
 
     if (!oldUser) {
       // return res.status(402).send("User not Registered");

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-// import userImg from "../../assets/user.png";
+import userImg from "../../assets/user.png";
 import { getUserProfile } from "../../redux/slices/postSlice";
 import Post from "../post/Post";
 import "./Profile.scss";
@@ -49,7 +49,7 @@ function Profile() {
           <div className="profile-card">
             <div className="avatar">
               <img
-                src={userProfile?.avatar?.url}
+                src={userProfile?.avatar?.url ? userProfile.avatar.url : userImg}
                 alt="userProfile"
                 className="user-image"
               />
@@ -64,7 +64,7 @@ function Profile() {
               <h5
                 onClick={handleFollowAndUnFollow}
                 className={
-                  isFollowing ? "hover-link follow-link" : "btn-primary"
+                  isFollowing ? "hover-link follow-link unfollow" : "btn-primary"
                 }
               >
                 {isFollowing ? "UnFollow" : "Follow"}

@@ -1,6 +1,9 @@
 .NavBar {
+  min-width: 500px;
+  padding: 5px;
   height: 60px;
-  border: 1px solid gray;
+  background-color: rgb(44, 43, 43);
+  border: 1px solid rgb(72, 69, 69);
 
   .container {
     max-width: 960px;
@@ -9,6 +12,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .banner {
+      color: white;
+    }
 
     .right-side {
       display: flex;
@@ -19,6 +26,7 @@
           font-size: 2rem;
           display: flex;
           align-items: center;
+          color: white;
         }
     }
   }

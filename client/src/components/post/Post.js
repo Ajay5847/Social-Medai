@@ -17,7 +17,7 @@ function Post({post}) {
   async function handleLike() {
     dispatch(showToast({
       type: TOAST_SUCCESS,
-      message: "Liked or Unliked"
+      message: post?.isLiked ? "DisLiked" : "Liked"
     }))
     dispatch(likeAndUnlike({
       postId: post._id
