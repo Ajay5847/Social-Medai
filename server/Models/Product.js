@@ -1,27 +1,35 @@
 const mongoose = require("mongoose");
 
-const postSchema = mongoose.Schema({
+const productSchema = mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
     required: true,
   },
-  image: {
+  productImage: {
     publicId: String,
     url: String,
   },
-  caption: {
+  productName: {
     type: String,
     required: true,
   },
-  likes: [
+  productPrice: {
+    type: Number,
+    required: true
+  },
+  productStock: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },
   ],
+  productVariants: {
+    type: String,
+    ref: "user"
+  }
 }, {
   timestamps: true,
 });
 
-module.exports = mongoose.model('post', postSchema);
+module.exports = mongoose.model('post', productSchema);

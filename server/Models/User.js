@@ -15,29 +15,22 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    bio: {
+    mobileNumber: {
+        type: Number,
+        required: true
+    },
+    address: {
         type: String,
+        required: true
     },
     avatar: {
         publicId: String,
         url: String,
     },
-    followers: [
+    orders: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'user'
-        }
-    ],
-    followings: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'user'
-        }
-    ],
-    posts: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'post'
+            ref: 'order'
         }
     ]
 }, {
